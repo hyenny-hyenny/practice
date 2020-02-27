@@ -60,14 +60,11 @@ public class AdminDAO {
 				dbPw = rs.getString("password");
 				if(dbPw.equals(pw)) {
 					n = ADMIN_LOGIN_SUCESS;		//로그인 성공 1
-					System.out.println("로그인성공");
 				}else {
 					n = ADMIN_LOGIN_PW_FAIL;	//비밀번호 불일치 0
-					System.out.println("비밀번호 안맞음");
 				}
 			}else {
 				n = ADMIN_LOGIN_NOT;
-				System.out.println("아이 없음");
 			}
 			
 		}catch(Exception e) {

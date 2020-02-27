@@ -21,6 +21,6 @@
 			<td><a href="<%=request.getContextPath()%>/admin/cat_input.jsp">카테고리 등록</a></td>			
 			<td><a href="<%=request.getContextPath()%>/admin/cat_list.jsp">카테고리 리스트</a></td>
 			<td><a href="<%=request.getContextPath()%>/admin/prod_input.jsp">상품 등록</a></td>
-			<td><a href="#">상품 리스트</a></td>					
+			<td><a href="<%=request.getContextPath()%>/admin/prodList.jsp">상품 리스트</a></td>					
 		</tr>
 	</table>

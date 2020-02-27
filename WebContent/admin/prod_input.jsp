@@ -5,7 +5,7 @@
 	CategoryDAO cdao = CategoryDAO.getInstance();
 %>
 <h3>상품 등록페이지</h3>
-<form name="prodFrm" action="prod_regOk.jsp" method="Post">
+<form name="prodFrm" action="prod_regOk.jsp" method="Post" enctype="multipart/form-data">
 	<table border=0 class="outLine" width=600>
 		<tr>
 			<th class="m3">카테고리</th>

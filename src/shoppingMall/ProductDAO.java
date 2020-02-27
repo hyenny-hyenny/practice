@@ -1,8 +1,11 @@
 package shoppingMall;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -59,6 +62,51 @@ public class ProductDAO {
 		}
 		return n;
 	}
+	
+	
+	//상품 리스트 조회
+	public ArrayList<ProductDTO> productAll() throws SQLException{
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "SELECT * FROM product ORDER BY pnum DESC";
+		
+		try {
+			conn = getConnection();
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			ArrayList<ProductDTO> list = makeArrayList(rs);
+			return list;
+		}finally {
+			if(rs != null) rs.close();
+			if(ps != null) ps.close();
+			if(conn != null) conn.close();
+		}
+	}
+	
+	
+	public ArrayList<ProductDTO> makeArrayList(ResultSet rs) throws SQLException{
+		ArrayList<ProductDTO> list = new ArrayList<ProductDTO>();
+		while(rs.next()) {
+			String pnum = rs.getString(1);
+			String pname = rs.getString(2);
+			String pcategory_fk = rs.getString(3);
+			String pcompany = rs.getString(4);
+			String pimage = rs.getString(5);
+			int pqty = rs.getInt(6);
+			int price = rs.getInt(7);
+			String pspec = rs.getString(8);
+			String pcontents = rs.getString(9);
+			int point = rs.getInt(10);
+			Date d = rs.getDate(11);
+			String pinputDate = d.toString();
+			ProductDTO pdto = new ProductDTO(pnum, pname, pcategory_fk, pcompany, pimage, pqty, 
+					price, pspec, pcontents, point, pinputDate, 0, 0, 0);
+			list.add(pdto);
+		}
+		return list;
+	}//makeArrayList()
+	
 	
 	//ConnectionPool에서 connection 확보
 	private Connection getConnection() {
